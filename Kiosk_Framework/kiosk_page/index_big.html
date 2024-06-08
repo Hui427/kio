@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="../lib/signage.base.js"></script>
+
+
+    <title>키오스크</title>
+</head>
+<body>
+    <header>사용자 키오스크</header> 
+    <div class="panel-container">
+        <div class="panel">
+            <img src="img/냉모밀.jpg" alt="Panel 1 Image" class="big"onclick="orderDrink(1)">
+            <p style="font-size: 50px;">냉모밀</p>
+        </div>
+        <div class="panel">
+            <img src="img/라멘.jpg" alt="Panel 2 Image" class="big"onclick="orderDrink(2)">
+            <p style="font-size: 50px;">라멘</p>
+        </div>
+        <div class="panel">
+            <img src="img/샐러드.jpg" alt="Panel 3 Image"class="big" onclick="orderDrink(3)">
+            <p style="font-size: 50px;">샐러드</p>
+        </div>
+        <div class="panel">
+            <img src="img/알리올리오해물파스타.jpg" alt="Panel 3 Image" class="big"onclick="orderDrink(3)">
+            <p style="font-size: 50px;">알리올리오해물파스타</p>
+        </div>
+        <div class="panel">
+            <img src="img/오므라이스.jpg" alt="Panel 3 Image" class="big"onclick="orderDrink(3)">
+            <p style="font-size: 50px;">오므라이스</p>
+        </div>
+        <div class="panel">
+            <img src="img/타코.jpg" alt="Panel 3 Image" class="big"onclick="orderDrink(3)">
+            <p style="font-size: 50px;">타코</p>
+        </div>
+        <div class="panel">
+            <img src="img/필라프.jpg" alt="Panel 3 Image"class="big" onclick="orderDrink(3)">
+            <p style="font-size: 50px;">필라프</p>
+        </div>
+    </div>
+    <!-- 번역버툰 -->
+    <button class="button_st" id="Back">뒤로가기(Back)</button>
+    
+</body>
+<script>
+    // 번역버튼...
+    document.getElementById("Back").addEventListener("click", function() {
+        window.location.href = "index.html";
+    });
+
+    // 주문 함수
+    let orderDrink = function(drink){
+        let data = new FormData();
+        data.append("order", drink)
+        POST("order", data, function(resp){ 
+            console.log(resp + ':' + resp.data)
+        });
+    }
+
+    // 테스트 코드, 참고용
+    let getTestService = function(){
+        let data = new FormData(); // 데이터 저장소 생성
+        data.append("name", "kiosk_test") // 데이터 담기 
+        POST("test", data, function(resp){ 
+            // 1. test라는 데이터를 서버단에 실행
+            // 2. data를 담아서 보냄
+            // 3. response 될 때 function 실행
+            console.log(resp + ':' + resp.data)
+            let n = resp.data.output;
+            document.querySelector('#test').innerHTML = n;
+        });
+    }
+</script>
+</html>
